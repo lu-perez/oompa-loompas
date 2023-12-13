@@ -24,7 +24,10 @@ export const oompaLoompasSlice = createSlice({
         oompaLoompas: OompaLoompa[];
       }>,
     ) => {
-      state.oompaLoompas = [...state.oompaLoompas, ...action.payload.oompaLoompas];
+      state.oompaLoompas = [
+        ...state.oompaLoompas,
+        ...action.payload.oompaLoompas,
+      ];
       state.currentPage = action.payload.currentPage;
       state.totalPages = action.payload.totalPages;
       state.isLoading = false;
