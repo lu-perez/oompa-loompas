@@ -24,8 +24,8 @@ export interface OompaLoompasResponse {
 }
 
 export interface OompaLoompasState {
+  oompaLoompas: OompaLoompa[];
   currentPage: number;
   totalPages: number;
-  oompaLoompas: OompaLoompa[];
   isLoading: boolean;
 }

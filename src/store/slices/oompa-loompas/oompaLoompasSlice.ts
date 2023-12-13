@@ -3,9 +3,9 @@ import { OompaLoompa, OompaLoompasState } from '../../../types/types';
 import { RootState } from '../../store';
 
 const initialState: OompaLoompasState = {
+  oompaLoompas: [],
   currentPage: 1,
   totalPages: 20,
-  oompaLoompas: [],
   isLoading: false,
 };
 
@@ -18,7 +18,11 @@ export const oompaLoompasSlice = createSlice({
     },
     setOompaLoompas: (
       state,
-      action: PayloadAction<{ currentPage: number; totalPages: number; oompaLoompas: OompaLoompa[] }>,
+      action: PayloadAction<{
+        currentPage: number;
+        totalPages: number;
+        oompaLoompas: OompaLoompa[]
+      }>,
     ) => {
       state.oompaLoompas = action.payload.oompaLoompas;
       state.currentPage = action.payload.currentPage;
