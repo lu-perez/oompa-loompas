@@ -21,7 +21,7 @@ export const oompaLoompasSlice = createSlice({
       action: PayloadAction<{
         currentPage: number;
         totalPages: number;
-        oompaLoompas: OompaLoompa[]
+        oompaLoompas: OompaLoompa[];
       }>,
     ) => {
       state.oompaLoompas = action.payload.oompaLoompas;
@@ -32,6 +32,8 @@ export const oompaLoompasSlice = createSlice({
   },
 });
 
-export const { startLoadingOompaLoompas, setOompaLoompas } = oompaLoompasSlice.actions;
+export const { startLoadingOompaLoompas, setOompaLoompas } =
+  oompaLoompasSlice.actions;
 
-export const selectOompaLoompas = (state: RootState): OompaLoompasState => state.oompaLoompas;
+export const selectOompaLoompas = (state: RootState): OompaLoompasState =>
+  state.oompaLoompas;

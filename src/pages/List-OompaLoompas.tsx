@@ -1,12 +1,17 @@
-import { useEffect } from 'react'
-import { useAppDispatch, useAppSelector } from '../store/hooks'
-import { selectOompaLoompas } from '../store/slices/oompa-loompas/oompaLoompasSlice'
-import { getOompaLoompas } from '../store/slices/oompa-loompas/thunks'
+import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { selectOompaLoompas } from '../store/slices/oompa-loompas/oompaLoompasSlice';
+import { getOompaLoompas } from '../store/slices/oompa-loompas/thunks';
 
 const ListOompaLoompas = () => {
   const dispatch = useAppDispatch();
-  const { isLoading, oompaLoompas, currentPage, totalPages } =
-    useAppSelector(selectOompaLoompas);
+
+  const {
+    isLoading,
+    oompaLoompas,
+    currentPage,
+    totalPages,
+  } = useAppSelector(selectOompaLoompas);
 
   useEffect(() => {
     dispatch(getOompaLoompas());
@@ -31,6 +36,6 @@ const ListOompaLoompas = () => {
       </button>
     </main>
   );
-}
+};
 
 export default ListOompaLoompas;

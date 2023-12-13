@@ -1,6 +1,6 @@
-import { Route, Routes } from 'react-router-dom'
-import ListOompaLoompas from '../pages/List-OompaLoompas'
-import DetailOompaLoompa from '../pages/Detail-OompaLoompa'
+import { Route, Routes } from 'react-router-dom';
+import ListOompaLoompas from '../pages/List-OompaLoompas';
+import DetailOompaLoompa from '../pages/Detail-OompaLoompa';
 
 const AppRouter = () => {
   return (
@@ -9,6 +9,6 @@ const AppRouter = () => {
       <Route path="/:id" element={<DetailOompaLoompa />} />
     </Routes>
   );
-}
+};
 
-export default AppRouter
+export default AppRouter;
