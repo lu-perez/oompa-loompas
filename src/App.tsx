@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from './store/hooks';
 
 function App() {
   const dispatch = useAppDispatch();
-  const { isLoading, oompaLoompas, page } = useAppSelector(selectOompaLoompas);
+  const { isLoading, oompaLoompas, currentPage, totalPages } = useAppSelector(selectOompaLoompas);
 
   useEffect(() => {
     dispatch(getOompaLoompas());
@@ -25,8 +25,8 @@ function App() {
 
         <button
           type="button"
-          disabled={isLoading}
-          onClick={() => dispatch(getOompaLoompas(page))}
+          disabled={isLoading || totalPages === currentPage}
+          onClick={() => dispatch(getOompaLoompas(currentPage + 1))}
         >
           Next
         </button>
