@@ -18,9 +18,9 @@ export interface OompaLoompa {
 }
 
 export interface OompaLoompasResponse {
+  results: OompaLoompa[];
   current: number;
   total: number;
-  results: OompaLoompa[];
 }
 
 export interface OompaLoompasState {

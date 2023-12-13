@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { selectOompaLoompas } from '../store/slices/oompa-loompas/oompaLoompasSlice';
 import { getOompaLoompas } from '../store/slices/oompa-loompas/thunks';
@@ -13,8 +13,13 @@ const ListOompaLoompas = () => {
     totalPages,
   } = useAppSelector(selectOompaLoompas);
 
+  const isInitialRender = useRef(true);
+
   useEffect(() => {
-    dispatch(getOompaLoompas());
+    if (isInitialRender.current) {
+      dispatch(getOompaLoompas());
+      isInitialRender.current = false;
+    }
   }, [dispatch]);
 
   return (

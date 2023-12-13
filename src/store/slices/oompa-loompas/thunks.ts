@@ -9,9 +9,7 @@ export const getOompaLoompas = (page = 1) => {
   return async (dispatch: Dispatch) => {
     dispatch(startLoadingOompaLoompas());
     try {
-      const { data }: AxiosResponse<OompaLoompasResponse> = await axios.get(
-        `${baseURL}?page=${page}`,
-      );
+      const { data }: AxiosResponse<OompaLoompasResponse> = await axios.get(`${baseURL}?page=${page}`);
       console.log(data);
       dispatch(
         setOompaLoompas({
