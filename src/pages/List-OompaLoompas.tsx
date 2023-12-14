@@ -1,27 +1,14 @@
-import { useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { selectOompaLoompas } from '../store/slices/oompa-loompas/oompaLoompasSlice';
 import { getOompaLoompas } from '../store/slices/oompa-loompas/thunks';
 import useInfiniteScroll from '../hooks/useInfiniteScroll';
+import Card from '../components/card/Card';
 
 const ListOompaLoompas = () => {
   const dispatch = useAppDispatch();
 
-  const {
-    isLoading,
-    oompaLoompas,
-    currentPage,
-    totalPages,
-  } = useAppSelector(selectOompaLoompas);
-
-  const isInitialRender = useRef(true);
-
-  useEffect(() => {
-    if (isInitialRender.current) {
-      dispatch(getOompaLoompas());
-      isInitialRender.current = false;
-    }
-  }, [dispatch]);
+  const { isLoading, oompaLoompas, currentPage, totalPages } =
+    useAppSelector(selectOompaLoompas);
 
   const bottomRef = useInfiniteScroll(
     () => dispatch(getOompaLoompas(currentPage + 1)),
@@ -32,18 +19,21 @@ const ListOompaLoompas = () => {
 
   return (
     <>
-      <main>
-        <h1>Oompa Loompas Infinite Scroll List</h1>
-        <ul>
-          {oompaLoompas.map((oompaLoompa) => (
-            <li style={{ margin: '30px' }} key={oompaLoompa.id}>
-              {oompaLoompa.first_name}
-            </li>
-          ))}
-        </ul>
-      </main>
-      <div ref={bottomRef}></div>
-      {isLoading && <p>Loading...</p>}
+      <div className="container">
+        <main>
+          <div className="header">
+            <h1>Find your Oompa Loompa</h1>
+            <h2>There are more than 100k</h2>
+          </div>
+          <div className="card-container">
+            {oompaLoompas.map((oompaLoompa) => (
+              <Card oompaLoompa={oompaLoompa} key={oompaLoompa.id} />
+            ))}
+          </div>
+          <div ref={bottomRef}></div>
+          {isLoading && <p>Loading...</p>}
+        </main>
+      </div>
     </>
   );
 };

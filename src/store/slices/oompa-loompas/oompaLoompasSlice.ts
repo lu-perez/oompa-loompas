@@ -24,10 +24,14 @@ export const oompaLoompasSlice = createSlice({
         oompaLoompas: OompaLoompa[];
       }>,
     ) => {
-      state.oompaLoompas = [
-        ...state.oompaLoompas,
-        ...action.payload.oompaLoompas,
-      ];
+      const uniqueOompaLoompas = action.payload.oompaLoompas.filter(
+        (incomingOompa) =>
+          !state.oompaLoompas.some(
+            (existingOompa) => existingOompa.id === incomingOompa.id,
+          ),
+      );
+
+      state.oompaLoompas = [...state.oompaLoompas, ...uniqueOompaLoompas];
       state.currentPage = action.payload.currentPage;
       state.totalPages = action.payload.totalPages;
       state.isLoading = false;
@@ -35,6 +39,8 @@ export const oompaLoompasSlice = createSlice({
   },
 });
 
-export const { startLoadingOompaLoompas, setOompaLoompas } = oompaLoompasSlice.actions;
+export const { startLoadingOompaLoompas, setOompaLoompas } =
+  oompaLoompasSlice.actions;
 
-export const selectOompaLoompas = (state: RootState): OompaLoompasState => state.oompaLoompas;
+export const selectOompaLoompas = (state: RootState): OompaLoompasState =>
+  state.oompaLoompas;

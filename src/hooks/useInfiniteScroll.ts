@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 const useInfiniteScroll = (
-  fn: () => void,
+  getData: () => void,
   currentPage: number,
   totalPages: number,
   isLoading: boolean,
@@ -15,7 +15,7 @@ const useInfiniteScroll = (
         window.innerHeight + window.scrollY >= bottomRef.current.offsetTop
       ) {
         if (currentPage < totalPages && !isLoading) {
-          fn();
+          getData();
         }
       }
     };
@@ -25,7 +25,7 @@ const useInfiniteScroll = (
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [currentPage, totalPages, isLoading, fn]);
+  }, [currentPage, totalPages, isLoading, getData]);
 
   return bottomRef;
 };
