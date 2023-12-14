@@ -7,8 +7,12 @@ import Card from '../components/card/Card';
 const ListOompaLoompas = () => {
   const dispatch = useAppDispatch();
 
-  const { isLoading, oompaLoompas, currentPage, totalPages } =
-    useAppSelector(selectOompaLoompas);
+  const {
+    isLoading,
+    oompaLoompas,
+    currentPage,
+    totalPages,
+  } = useAppSelector(selectOompaLoompas);
 
   const bottomRef = useInfiniteScroll(
     () => dispatch(getOompaLoompas(currentPage + 1)),
@@ -18,23 +22,21 @@ const ListOompaLoompas = () => {
   );
 
   return (
-    <>
-      <div className="container">
-        <main>
-          <div className="header">
-            <h1>Find your Oompa Loompa</h1>
-            <h2>There are more than 100k</h2>
-          </div>
-          <div className="card-container">
-            {oompaLoompas.map((oompaLoompa) => (
-              <Card oompaLoompa={oompaLoompa} key={oompaLoompa.id} />
-            ))}
-          </div>
-          <div ref={bottomRef}></div>
-          {isLoading && <p>Loading...</p>}
-        </main>
-      </div>
-    </>
+    <div className="container">
+      <main>
+        <div className="header">
+          <h1>Find your Oompa Loompa</h1>
+          <h2>There are more than 100k</h2>
+        </div>
+        <div className="card-container">
+          {oompaLoompas.map((oompaLoompa) => (
+            <Card oompaLoompa={oompaLoompa} key={oompaLoompa.id} />
+          ))}
+        </div>
+        <div ref={bottomRef}></div>
+        {isLoading && <p>Loading...</p>}
+      </main>
+    </div>
   );
 };
 
