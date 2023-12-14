@@ -1,9 +1,14 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { OompaLoompa, OompaLoompasState } from '../../../types/types';
+import {
+  OompaLoompa,
+  OompaLoompasState,
+  DetailedOompaLoompaWithoutId,
+} from '../../../types/types';
 import { RootState } from '../../store';
 
 const initialState: OompaLoompasState = {
   oompaLoompas: [],
+  detailedOompaLoompas: [],
   currentPage: 1,
   totalPages: 20,
   isLoading: false,
@@ -16,6 +21,7 @@ export const oompaLoompasSlice = createSlice({
     startLoadingOompaLoompas: (state) => {
       state.isLoading = true;
     },
+
     setOompaLoompas: (
       state,
       action: PayloadAction<{
@@ -30,15 +36,36 @@ export const oompaLoompasSlice = createSlice({
             (existingOompa) => existingOompa.id === incomingOompa.id,
           ),
       );
-
       state.oompaLoompas = [...state.oompaLoompas, ...uniqueOompaLoompas];
       state.currentPage = action.payload.currentPage;
       state.totalPages = action.payload.totalPages;
       state.isLoading = false;
     },
+
+    setDetailedOompaLoompas: (
+      state,
+      action: PayloadAction<{
+        detailedOompaLoompa: DetailedOompaLoompaWithoutId,
+        oompaLoompaId: number
+      }>,
+    ) => {
+      const incomingDetailedOompa = action.payload.detailedOompaLoompa;
+      const isDuplicate = state.detailedOompaLoompas.some(
+        (existingDetailedOompa) =>
+          existingDetailedOompa.id === action.payload.oompaLoompaId,
+      );
+      if (!isDuplicate) {
+        state.detailedOompaLoompas = [...state.detailedOompaLoompas, { id: action.payload.oompaLoompaId, ...incomingDetailedOompa }]
+      }
+      state.isLoading = false;
+    },
   },
 });
 
-export const { startLoadingOompaLoompas, setOompaLoompas } = oompaLoompasSlice.actions;
+export const {
+  startLoadingOompaLoompas,
+  setOompaLoompas,
+  setDetailedOompaLoompas
+} = oompaLoompasSlice.actions;
 
 export const selectOompaLoompas = (state: RootState): OompaLoompasState => state.oompaLoompas;

@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom'
-import { getGenderLabel } from '../../helpers/getGenderLabel'
+import { Link } from 'react-router-dom';
+import { getGenderLabel } from '../../helpers/getGenderLabel';
 import { OompaLoompa } from '../../types/types';
 
 type CardProps = {

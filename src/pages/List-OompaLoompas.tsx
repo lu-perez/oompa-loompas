@@ -7,12 +7,8 @@ import Card from '../components/card/Card';
 const ListOompaLoompas = () => {
   const dispatch = useAppDispatch();
 
-  const {
-    isLoading,
-    oompaLoompas,
-    currentPage,
-    totalPages,
-  } = useAppSelector(selectOompaLoompas);
+  const { isLoading, oompaLoompas, currentPage, totalPages } =
+    useAppSelector(selectOompaLoompas);
 
   const bottomRef = useInfiniteScroll(
     () => dispatch(getOompaLoompas(currentPage + 1)),
@@ -24,7 +20,7 @@ const ListOompaLoompas = () => {
   return (
     <div className="container">
       <main>
-        <div className="header">
+        <div className="heading">
           <h1>Find your Oompa Loompa</h1>
           <h2>There are more than 100k</h2>
         </div>
