@@ -12,6 +12,11 @@
   --card-bg-color: #f9f9f9;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 nav {
   padding: 1rem;
   background-color: var(--nav-bg-color);
@@ -27,9 +32,6 @@ nav {
 
     ul {
       li {
-        color: var(--primary-font-color);
-        text-decoration: none;
-
         p {
           font-size: 1.2rem;
           font-weight: bold;
