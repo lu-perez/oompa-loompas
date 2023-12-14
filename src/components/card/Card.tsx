@@ -1,3 +1,4 @@
+import { getGenderLabel } from '../../helpers/getGenderLabel'
 import { OompaLoompa } from '../../types/types';
 
 type CardProps = {
@@ -12,7 +13,7 @@ const Card = ({ oompaLoompa }: CardProps) => {
       </div>
       <div className="card-body">
         <div className="card-title">{oompaLoompa.first_name}</div>
-        <div className="card-subtitle">{oompaLoompa.gender}</div>
+        <div className="card-subtitle">{getGenderLabel(oompaLoompa.gender)}</div>
         <div className="card-subtitle">
           <i>{oompaLoompa.profession}</i>
         </div>
