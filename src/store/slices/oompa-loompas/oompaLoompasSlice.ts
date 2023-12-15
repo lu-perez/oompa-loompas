@@ -45,8 +45,8 @@ export const oompaLoompasSlice = createSlice({
     setDetailedOompaLoompas: (
       state,
       action: PayloadAction<{
-        detailedOompaLoompa: DetailedOompaLoompaWithoutId,
-        oompaLoompaId: number
+        detailedOompaLoompa: DetailedOompaLoompaWithoutId;
+        oompaLoompaId: number;
       }>,
     ) => {
       const incomingDetailedOompa = action.payload.detailedOompaLoompa;
@@ -55,7 +55,10 @@ export const oompaLoompasSlice = createSlice({
           existingDetailedOompa.id === action.payload.oompaLoompaId,
       );
       if (!isDuplicate) {
-        state.detailedOompaLoompas = [...state.detailedOompaLoompas, { id: action.payload.oompaLoompaId, ...incomingDetailedOompa }]
+        state.detailedOompaLoompas = [
+          ...state.detailedOompaLoompas,
+          { id: action.payload.oompaLoompaId, ...incomingDetailedOompa },
+        ];
       }
       state.isLoading = false;
     },
@@ -65,7 +68,8 @@ export const oompaLoompasSlice = createSlice({
 export const {
   startLoadingOompaLoompas,
   setOompaLoompas,
-  setDetailedOompaLoompas
+  setDetailedOompaLoompas,
 } = oompaLoompasSlice.actions;
 
-export const selectOompaLoompas = (state: RootState): OompaLoompasState => state.oompaLoompas;
+export const selectOompaLoompas = (state: RootState): OompaLoompasState =>
+  state.oompaLoompas;

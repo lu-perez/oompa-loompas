@@ -1,8 +1,15 @@
 import axios, { AxiosResponse } from 'axios';
-import { setDetailedOompaLoompas, setOompaLoompas, startLoadingOompaLoompas } from './oompaLoompasSlice';
+import {
+  setDetailedOompaLoompas,
+  setOompaLoompas,
+  startLoadingOompaLoompas,
+} from './oompaLoompasSlice';
 import { Dispatch } from '@reduxjs/toolkit';
-import { DetailedOompaLoompaWithoutId, OompaLoompasResponse } from '../../../types/types';
-import { RootState } from '../../store'
+import {
+  DetailedOompaLoompaWithoutId,
+  OompaLoompasResponse,
+} from '../../../types/types';
+import { RootState } from '../../store';
 
 const baseURL =
   'https://2q2woep105.execute-api.eu-west-1.amazonaws.com/napptilus/oompa-loompas';
@@ -32,22 +39,24 @@ export const getDetailedOompaLoompa = (oompaLoompaId: number) => {
   return async (dispatch: Dispatch, getState: () => RootState) => {
     dispatch(startLoadingOompaLoompas());
 
-    const existingDetailedOompa = getState().oompaLoompas.detailedOompaLoompas.find(
-      (detailedOompa) => detailedOompa.id === oompaLoompaId
-    );
+    const existingDetailedOompa =
+      getState().oompaLoompas.detailedOompaLoompas.find(
+        (detailedOompa) => detailedOompa.id === oompaLoompaId,
+      );
 
     if (existingDetailedOompa) {
-      dispatch(setDetailedOompaLoompas({
-        detailedOompaLoompa: existingDetailedOompa,
-        oompaLoompaId,
-      }));
+      dispatch(
+        setDetailedOompaLoompas({
+          detailedOompaLoompa: existingDetailedOompa,
+          oompaLoompaId,
+        }),
+      );
       return;
     }
 
     try {
-      const { data }: AxiosResponse<DetailedOompaLoompaWithoutId> = await axios.get(
-        `${baseURL}/${oompaLoompaId}`,
-      );
+      const { data }: AxiosResponse<DetailedOompaLoompaWithoutId> =
+        await axios.get(`${baseURL}/${oompaLoompaId}`);
       console.log(data);
       dispatch(
         setDetailedOompaLoompas({
