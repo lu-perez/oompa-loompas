@@ -39,7 +39,7 @@ const DetailOompaLoompa = () => {
             </div>
           ))}
       </div>
-      {isLoading && 'loading'}
+      {isLoading && <p className="loader">Loading...</p>}
     </div>
   );
 };
