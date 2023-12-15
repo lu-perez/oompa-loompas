@@ -68,8 +68,8 @@ const ListOompaLoompas = () => {
               ))}
             </div>
           )}
+          <div ref={bottomRef}></div>
         </div>
-        <div ref={bottomRef}></div>
         {isLoading && <p className="loader">Loading...</p>}
       </main>
     </div>
