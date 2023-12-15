@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
-import ListOompaLoompas from '../pages/List-OompaLoompas';
-import DetailOompaLoompa from '../pages/Detail-OompaLoompa';
+import ListOompaLoompas from '../views/List-OompaLoompas';
+import DetailOompaLoompa from '../views/Detail-OompaLoompa';
 
 const AppRouter = () => {
   return (
