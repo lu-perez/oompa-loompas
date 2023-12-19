@@ -17,9 +17,10 @@ export interface OompaLoompa {
   height: number;
 }
 
-export interface DetailedOompaLoompa extends OompaLoompa {
+export type FilteredOompaLoompa = Omit<OompaLoompa, 'favorite' | 'email' | 'age' | 'country' | 'height'>
+
+export interface DetailedOompaLoompa extends FilteredOompaLoompa {
   description: string;
-  quota: string;
 }
 
 export type DetailedOompaLoompaWithoutId = Omit<DetailedOompaLoompa, 'id'>;
@@ -31,7 +32,7 @@ export interface OompaLoompasResponse {
 }
 
 export interface OompaLoompasState {
-  oompaLoompas: OompaLoompa[];
+  oompaLoompas: FilteredOompaLoompa[];
   detailedOompaLoompas: DetailedOompaLoompa[];
   currentPage: number;
   totalPages: number;

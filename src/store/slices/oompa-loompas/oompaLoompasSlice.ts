@@ -1,8 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import {
-  OompaLoompa,
   OompaLoompasState,
   DetailedOompaLoompaWithoutId,
+  FilteredOompaLoompa,
 } from '../../../types/types';
 import { RootState } from '../../store';
 
@@ -27,7 +27,7 @@ export const oompaLoompasSlice = createSlice({
       action: PayloadAction<{
         currentPage: number;
         totalPages: number;
-        oompaLoompas: OompaLoompa[];
+        oompaLoompas: FilteredOompaLoompa[];
       }>,
     ) => {
       const uniqueOompaLoompas = action.payload.oompaLoompas.filter(

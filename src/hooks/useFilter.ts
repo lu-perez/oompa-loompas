@@ -1,15 +1,15 @@
 import { useMemo } from 'react';
-import { OompaLoompa } from '../types/types';
+import { FilteredOompaLoompa } from '../types/types';
 
 const useOompaLoompaFilter = (
   searchTerm: string,
-  oompaLoompas: OompaLoompa[],
+  oompaLoompas: FilteredOompaLoompa[],
 ) => {
   const filteredOompas = useMemo(() => {
     if (!searchTerm) {
       return oompaLoompas;
     }
-    return oompaLoompas.filter((oompa: OompaLoompa) => {
+    return oompaLoompas.filter((oompa: FilteredOompaLoompa) => {
       const searchText = searchTerm.toLowerCase();
       const oompaName = oompa.first_name.toLowerCase();
       const oompaProfession = oompa.profession.toLowerCase();
