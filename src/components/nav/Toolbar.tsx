@@ -5,7 +5,7 @@ const Toolbar = () => {
     <nav>
       <div className="container">
         <Link to="/">
-          <img src={'assets/img/logo-umpa-loompa.png'} />
+          <img src={'/public/static/assets/img/logo-umpa-loompa.png'} />
         </Link>
         <ul>
           <li>
