@@ -10,7 +10,7 @@ const InputSearch = ({ setSearchTerm }: InputSearchProps) => {
         placeholder="Search"
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <img className="search-icon" src={'src/assets/img/ic_search.png'} />
+      <img className="search-icon" src={'assets/img/ic_search.png'} />
     </div>
   );
 };
