@@ -59,8 +59,9 @@ export const getDetailedOompaLoompa = (oompaLoompaId: number) => {
     if (existingDetailedOompa) {
       dispatch(
         setDetailedOompaLoompas({
-          detailedOompaLoompa: existingDetailedOompa,
+          detailedOompaLoompas: existingDetailedOompa,
           oompaLoompaId,
+          activeDetailedOompaLoompa: existingDetailedOompa,
         }),
       );
       return;
@@ -76,7 +77,7 @@ export const getDetailedOompaLoompa = (oompaLoompaId: number) => {
 
       dispatch(
         setDetailedOompaLoompas({
-          detailedOompaLoompa: {
+          detailedOompaLoompas: {
             first_name,
             last_name,
             gender,
@@ -85,6 +86,14 @@ export const getDetailedOompaLoompa = (oompaLoompaId: number) => {
             description,
           },
           oompaLoompaId,
+          activeDetailedOompaLoompa: {
+            first_name,
+            last_name,
+            gender,
+            image,
+            profession,
+            description,
+          }
         }),
       );
     } catch (error) {

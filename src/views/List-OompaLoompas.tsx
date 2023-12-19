@@ -4,7 +4,7 @@ import { getOompaLoompas } from '../store/slices/oompa-loompas/thunks';
 import useInfiniteScroll from '../hooks/useInfiniteScroll';
 import Card from '../components/card/Card';
 import InputSearch from '../components/inputSearch/InputSearch';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useOompaLoompaFilter from '../hooks/useFilter';
 import { Labels } from '../config/labels'
 
@@ -23,9 +23,11 @@ const ListOompaLoompas = () => {
     isLoading,
   );
 
-  if (!oompaLoompas.length) {
-    dispatch(getOompaLoompas());
-  }
+  useEffect(() => {
+    if (!oompaLoompas.length) {
+      dispatch(getOompaLoompas());
+    }
+  }, [dispatch, oompaLoompas])
 
   const filteredOompas = useOompaLoompaFilter(searchTerm, oompaLoompas);
 

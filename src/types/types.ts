@@ -34,6 +34,7 @@ export interface OompaLoompasResponse {
 export interface OompaLoompasState {
   oompaLoompas: FilteredOompaLoompa[];
   detailedOompaLoompas: DetailedOompaLoompa[];
+  activeDetailedOompaLoompa: DetailedOompaLoompa | null;
   currentPage: number;
   totalPages: number;
   isLoading: boolean;
