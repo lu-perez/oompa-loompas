@@ -8,12 +8,15 @@ import { useEffect, useState } from 'react';
 import { OompaLoompa } from '../types/types';
 
 const ListOompaLoompas = () => {
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [filteredOompas, setFilteredOompas] = useState<OompaLoompa[] | null>(
+    null,
+  );
+
   const dispatch = useAppDispatch();
 
   const { isLoading, oompaLoompas, currentPage, totalPages } =
     useAppSelector(selectOompaLoompas);
-
-  const [searchTerm, setSearchTerm] = useState<string>('');
 
   const bottomRef = useInfiniteScroll(
     () => dispatch(getOompaLoompas(currentPage + 1)),
@@ -22,9 +25,9 @@ const ListOompaLoompas = () => {
     isLoading,
   );
 
-  const [filteredOompas, setFilteredOompas] = useState<OompaLoompa[] | null>(
-    null,
-  );
+  useEffect(() => {
+    dispatch(getOompaLoompas());
+  }, [dispatch]);
 
   useEffect(() => {
     if (searchTerm && oompaLoompas.length) {
@@ -33,7 +36,7 @@ const ListOompaLoompas = () => {
         const oompaName = oompa.first_name.toLowerCase();
         const oompaProfession = oompa.profession.toLowerCase();
         return (
-          oompaName.includes(searchText) || oompaProfession.includes(searchText)
+          oompaName.concat(oompaProfession).includes(searchText)
         );
       });
       setFilteredOompas(filtered);
