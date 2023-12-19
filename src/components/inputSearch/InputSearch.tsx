@@ -1,4 +1,4 @@
-import { Labels } from '../../config/labels'
+import { Labels } from '../../config/labels';
 
 interface InputSearchProps {
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;

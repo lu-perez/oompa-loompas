@@ -6,7 +6,7 @@ import Card from '../components/card/Card';
 import InputSearch from '../components/inputSearch/InputSearch';
 import { useEffect, useState } from 'react';
 import useOompaLoompaFilter from '../hooks/useFilter';
-import { Labels } from '../config/labels'
+import { Labels } from '../config/labels';
 
 const ListOompaLoompas = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -27,7 +27,7 @@ const ListOompaLoompas = () => {
     if (!oompaLoompas.length) {
       dispatch(getOompaLoompas());
     }
-  }, [dispatch, oompaLoompas])
+  }, [dispatch, oompaLoompas]);
 
   const filteredOompas = useOompaLoompaFilter(searchTerm, oompaLoompas);
 
