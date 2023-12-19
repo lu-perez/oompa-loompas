@@ -4,19 +4,18 @@ import { getOompaLoompas } from '../store/slices/oompa-loompas/thunks';
 import useInfiniteScroll from '../hooks/useInfiniteScroll';
 import Card from '../components/card/Card';
 import InputSearch from '../components/inputSearch/InputSearch';
-import { useEffect, useState } from 'react';
-import { OompaLoompa } from '../types/types';
+import { useEffect, useMemo, useState } from 'react';
+import { OompaLoompa } from '../types/types'
 
 const ListOompaLoompas = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const [filteredOompas, setFilteredOompas] = useState<OompaLoompa[] | null>(
-    null,
-  );
 
   const dispatch = useAppDispatch();
 
   const { isLoading, oompaLoompas, currentPage, totalPages } =
     useAppSelector(selectOompaLoompas);
+
+  console.log(oompaLoompas)
 
   const bottomRef = useInfiniteScroll(
     () => dispatch(getOompaLoompas(currentPage + 1)),
@@ -29,19 +28,18 @@ const ListOompaLoompas = () => {
     dispatch(getOompaLoompas());
   }, [dispatch]);
 
-  useEffect(() => {
-    if (searchTerm && oompaLoompas.length) {
-      const filtered = oompaLoompas.filter((oompa) => {
-        const searchText = searchTerm.toLowerCase();
-        const oompaName = oompa.first_name.toLowerCase();
-        const oompaProfession = oompa.profession.toLowerCase();
-        return (
-          oompaName.concat(oompaProfession).includes(searchText)
-        );
-      });
-      setFilteredOompas(filtered);
+  const filteredOompas = useMemo(() => {
+    if (!searchTerm) {
+      return []
     }
+    return oompaLoompas.filter((oompa: OompaLoompa) => {
+      const searchText = searchTerm.toLowerCase();
+      const oompaName = oompa.first_name.toLowerCase();
+      const oompaProfession = oompa.profession.toLowerCase();
+      return oompaName.concat(oompaProfession).includes(searchText);
+    });
   }, [searchTerm, oompaLoompas]);
+
 
   return (
     <div className="container">
