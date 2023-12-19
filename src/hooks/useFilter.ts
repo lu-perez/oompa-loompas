@@ -11,9 +11,15 @@ const useOompaLoompaFilter = (
     }
     return oompaLoompas.filter((oompa: FilteredOompaLoompa) => {
       const searchText = searchTerm.toLowerCase();
-      const oompaName = oompa.first_name.toLowerCase();
+      const oompaFirstName = oompa.first_name.toLowerCase();
+      const oompaLastName = oompa.last_name.toLowerCase();
+      const oompaGender = oompa.gender.toLowerCase();
       const oompaProfession = oompa.profession.toLowerCase();
-      return oompaName.concat(oompaProfession).includes(searchText);
+      return oompaFirstName
+        .concat(oompaLastName)
+        .concat(oompaProfession)
+        .concat(oompaGender)
+        .includes(searchText);
     });
   }, [searchTerm, oompaLoompas]);
 

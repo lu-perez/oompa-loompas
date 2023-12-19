@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { getGenderLabel } from '../../helpers/getGenderLabel';
 import { FilteredOompaLoompa } from '../../types/types';
 
 type CardProps = {
@@ -16,7 +15,7 @@ const Card = ({ oompaLoompa }: CardProps) => {
         <div className="card-body">
           <div className="card-title">{oompaLoompa.first_name}</div>
           <div className="card-subtitle">
-            {getGenderLabel(oompaLoompa.gender)}
+            {oompaLoompa.gender}
           </div>
           <div className="card-subtitle">
             <i>{oompaLoompa.profession}</i>

@@ -1,4 +1,4 @@
-export interface OompaLoompa {
+export interface RawOompaLoompa {
   id: number;
   first_name: string;
   last_name: string;
@@ -17,6 +17,10 @@ export interface OompaLoompa {
   height: number;
 }
 
+export type OompaLoompa = Omit<RawOompaLoompa, 'gender'> & {
+  gender: 'Woman' | 'Male' | 'Unknown'
+}
+
 export type FilteredOompaLoompa = Omit<
   OompaLoompa,
   'favorite' | 'email' | 'age' | 'country' | 'height'
@@ -29,7 +33,7 @@ export interface DetailedOompaLoompa extends FilteredOompaLoompa {
 export type DetailedOompaLoompaWithoutId = Omit<DetailedOompaLoompa, 'id'>;
 
 export interface OompaLoompasResponse {
-  results: OompaLoompa[];
+  results: RawOompaLoompa[];
   current: number;
   total: number;
 }

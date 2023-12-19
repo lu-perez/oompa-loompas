@@ -11,6 +11,7 @@ import {
   OompaLoompasResponse,
 } from '../../../types/types';
 import { RootState } from '../../store';
+import { getGenderLabel } from '../../../helpers/getGenderLabel'
 
 const baseURL =
   'https://2q2woep105.execute-api.eu-west-1.amazonaws.com/napptilus/oompa-loompas';
@@ -30,7 +31,7 @@ export const getOompaLoompas = (page = 1) => {
           id,
           first_name,
           last_name,
-          gender,
+          gender: getGenderLabel(gender),
           image,
           profession,
         }),
@@ -83,7 +84,7 @@ export const getDetailedOompaLoompa = (oompaLoompaId: number) => {
           detailedOompaLoompas: {
             first_name,
             last_name,
-            gender,
+            gender: getGenderLabel(gender),
             image,
             profession,
             description,
@@ -97,7 +98,7 @@ export const getDetailedOompaLoompa = (oompaLoompaId: number) => {
           activeDetailedOompaLoompa: {
             first_name,
             last_name,
-            gender,
+            gender: getGenderLabel(gender),
             image,
             profession,
             description,
