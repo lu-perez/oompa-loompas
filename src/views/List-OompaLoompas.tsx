@@ -6,6 +6,7 @@ import Card from '../components/card/Card';
 import InputSearch from '../components/inputSearch/InputSearch';
 import { useState } from 'react';
 import useOompaLoompaFilter from '../hooks/useFilter';
+import { Labels } from '../config/labels'
 
 const ListOompaLoompas = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
@@ -33,8 +34,8 @@ const ListOompaLoompas = () => {
       <main>
         <InputSearch setSearchTerm={setSearchTerm} />
         <div className="heading">
-          <h1>Find your Oompa Loompa</h1>
-          <h2>There are more than 100k</h2>
+          <h1>{Labels.findYourOompaLoompa}</h1>
+          <h2>{Labels.moreThan100k}</h2>
         </div>
         <div>
           {searchTerm ? (
@@ -46,7 +47,7 @@ const ListOompaLoompas = () => {
               </div>
             ) : (
               <h4 className="not-found">
-                Cannot find Oompa Loompas with term <b>"{searchTerm}"</b>
+                {Labels.notFound} <b>"{searchTerm}"</b>
               </h4>
             )
           ) : (
@@ -58,7 +59,7 @@ const ListOompaLoompas = () => {
           )}
           <div ref={bottomRef}></div>
         </div>
-        {isLoading && <p className="loader">Loading...</p>}
+        {isLoading && <p className="loader">{Labels.loading}</p>}
       </main>
     </div>
   );

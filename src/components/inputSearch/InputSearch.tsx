@@ -1,3 +1,5 @@
+import { Labels } from '../../config/labels'
+
 interface InputSearchProps {
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -7,7 +9,7 @@ const InputSearch = ({ setSearchTerm }: InputSearchProps) => {
     <div className="search-bar">
       <input
         type="text"
-        placeholder="Search"
+        placeholder={Labels.searchTermPlaceholder}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
       <img className="search-icon" src={'src/assets/img/ic_search.png'} />
