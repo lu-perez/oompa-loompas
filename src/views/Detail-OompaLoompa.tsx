@@ -4,6 +4,7 @@ import { getDetailedOompaLoompa } from '../store/slices/oompa-loompas/thunks';
 import { useParams } from 'react-router-dom';
 import { selectOompaLoompas } from '../store/slices/oompa-loompas/oompaLoompasSlice';
 import { getGenderLabel } from '../helpers/getGenderLabel';
+import { Labels } from '../config/labels'
 
 const DetailOompaLoompa = () => {
   const { id } = useParams();
@@ -11,7 +12,7 @@ const DetailOompaLoompa = () => {
 
   const dispatch = useAppDispatch();
 
-  const { isLoading, detailedOompaLoompas } =
+  const { isLoading, activeDetailedOompaLoompa } =
     useAppSelector(selectOompaLoompas);
 
   useEffect(() => {
@@ -21,26 +22,25 @@ const DetailOompaLoompa = () => {
   }, [dispatch, numericId]);
 
   return (
-    <div className="container">
-      <div className="details">
-        {detailedOompaLoompas
-          .filter((detailedOompa) => detailedOompa.id === numericId)
-          .map((oompaLoompa) => (
-            <div className="card" key={oompaLoompa.id}>
-              <img src={oompaLoompa.image} />
+    <>
+      {!isLoading && activeDetailedOompaLoompa && (
+        <div className="container">
+          <div className="details">
+            <div className="card" key={activeDetailedOompaLoompa.id}>
+              <img src={activeDetailedOompaLoompa.image} />
               <div className="card-body">
-                <h1>{oompaLoompa.first_name}</h1>
-                <h2>{getGenderLabel(oompaLoompa.gender)}</h2>
+                <h1>{activeDetailedOompaLoompa?.first_name}</h1>
+                <h2>{getGenderLabel(activeDetailedOompaLoompa.gender)}</h2>
                 <h2>
-                  <i>{oompaLoompa.profession}</i>
+                  <i>{activeDetailedOompaLoompa?.profession}</i>
                 </h2>
-                <p>{oompaLoompa.description}</p>
+                <p>{activeDetailedOompaLoompa?.description}</p>
               </div>
             </div>
-          ))}
-      </div>
-      {isLoading && <p className="loader">Loading...</p>}
-    </div>
+          </div>
+        </div>)}
+      {isLoading && <p className="loader">{Labels.loading}</p>}
+    </>
   );
 };
 

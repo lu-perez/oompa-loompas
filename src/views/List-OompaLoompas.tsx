@@ -5,15 +5,16 @@ import useInfiniteScroll from '../hooks/useInfiniteScroll';
 import Card from '../components/card/Card';
 import InputSearch from '../components/inputSearch/InputSearch';
 import { useEffect, useState } from 'react';
-import { OompaLoompa } from '../types/types';
+import useOompaLoompaFilter from '../hooks/useFilter';
+import { Labels } from '../config/labels'
 
 const ListOompaLoompas = () => {
+  const [searchTerm, setSearchTerm] = useState<string>('');
+
   const dispatch = useAppDispatch();
 
   const { isLoading, oompaLoompas, currentPage, totalPages } =
     useAppSelector(selectOompaLoompas);
-
-  const [searchTerm, setSearchTerm] = useState<string>('');
 
   const bottomRef = useInfiniteScroll(
     () => dispatch(getOompaLoompas(currentPage + 1)),
@@ -22,31 +23,21 @@ const ListOompaLoompas = () => {
     isLoading,
   );
 
-  const [filteredOompas, setFilteredOompas] = useState<OompaLoompa[] | null>(
-    null,
-  );
-
   useEffect(() => {
-    if (searchTerm && oompaLoompas.length) {
-      const filtered = oompaLoompas.filter((oompa) => {
-        const searchText = searchTerm.toLowerCase();
-        const oompaName = oompa.first_name.toLowerCase();
-        const oompaProfession = oompa.profession.toLowerCase();
-        return (
-          oompaName.includes(searchText) || oompaProfession.includes(searchText)
-        );
-      });
-      setFilteredOompas(filtered);
+    if (!oompaLoompas.length) {
+      dispatch(getOompaLoompas());
     }
-  }, [searchTerm, oompaLoompas]);
+  }, [dispatch, oompaLoompas])
+
+  const filteredOompas = useOompaLoompaFilter(searchTerm, oompaLoompas);
 
   return (
     <div className="container">
       <main>
         <InputSearch setSearchTerm={setSearchTerm} />
         <div className="heading">
-          <h1>Find your Oompa Loompa</h1>
-          <h2>There are more than 100k</h2>
+          <h1>{Labels.findYourOompaLoompa}</h1>
+          <h2>{Labels.moreThan100k}</h2>
         </div>
         <div>
           {searchTerm ? (
@@ -58,7 +49,7 @@ const ListOompaLoompas = () => {
               </div>
             ) : (
               <h4 className="not-found">
-                Cannot find Oompa Loompas with term <b>"{searchTerm}"</b>
+                {Labels.notFound} <b>"{searchTerm}"</b>
               </h4>
             )
           ) : (
@@ -70,7 +61,7 @@ const ListOompaLoompas = () => {
           )}
           <div ref={bottomRef}></div>
         </div>
-        {isLoading && <p className="loader">Loading...</p>}
+        {isLoading && <p className="loader">{Labels.loading}</p>}
       </main>
     </div>
   );

@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import { getGenderLabel } from '../../helpers/getGenderLabel';
-import { OompaLoompa } from '../../types/types';
+import { FilteredOompaLoompa } from '../../types/types';
 
 type CardProps = {
-  oompaLoompa: OompaLoompa;
+  oompaLoompa: FilteredOompaLoompa;
 };
 
 const Card = ({ oompaLoompa }: CardProps) => {
