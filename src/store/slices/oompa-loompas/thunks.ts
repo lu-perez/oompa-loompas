@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import {
+  setActiveDetailedOompaLoompa,
   setDetailedOompaLoompas,
   setOompaLoompas,
   startLoadingOompaLoompas,
@@ -21,17 +22,19 @@ export const getOompaLoompas = (page = 1) => {
       const { data }: AxiosResponse<OompaLoompasResponse> = await axios.get(
         `${baseURL}?page=${page}`,
       );
-      
+
       console.log(data);
 
-      const filteredResults = data.results.map(({ id, first_name, last_name, gender, image, profession }) => ({
-        id, 
-        first_name,
-        last_name,
-        gender,
-        image,
-        profession
-      }));
+      const filteredResults = data.results.map(
+        ({ id, first_name, last_name, gender, image, profession }) => ({
+          id,
+          first_name,
+          last_name,
+          gender,
+          image,
+          profession,
+        }),
+      );
 
       dispatch(
         setOompaLoompas({
@@ -40,7 +43,6 @@ export const getOompaLoompas = (page = 1) => {
           totalPages: data.total,
         }),
       );
-
     } catch (error) {
       console.error(error);
     }
@@ -61,7 +63,6 @@ export const getDetailedOompaLoompa = (oompaLoompaId: number) => {
         setDetailedOompaLoompas({
           detailedOompaLoompas: existingDetailedOompa,
           oompaLoompaId,
-          activeDetailedOompaLoompa: existingDetailedOompa,
         }),
       );
       return;
@@ -73,10 +74,12 @@ export const getDetailedOompaLoompa = (oompaLoompaId: number) => {
 
       console.log(data);
 
-      const { first_name, last_name, gender, image, profession, description } = data;
+      const { first_name, last_name, gender, image, profession, description } =
+        data;
 
       dispatch(
         setDetailedOompaLoompas({
+          oompaLoompaId,
           detailedOompaLoompas: {
             first_name,
             last_name,
@@ -85,6 +88,11 @@ export const getDetailedOompaLoompa = (oompaLoompaId: number) => {
             profession,
             description,
           },
+        }),
+      );
+
+      dispatch(
+        setActiveDetailedOompaLoompa({
           oompaLoompaId,
           activeDetailedOompaLoompa: {
             first_name,
@@ -93,7 +101,7 @@ export const getDetailedOompaLoompa = (oompaLoompaId: number) => {
             image,
             profession,
             description,
-          }
+          },
         }),
       );
     } catch (error) {

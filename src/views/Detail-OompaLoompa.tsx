@@ -4,7 +4,7 @@ import { getDetailedOompaLoompa } from '../store/slices/oompa-loompas/thunks';
 import { useParams } from 'react-router-dom';
 import { selectOompaLoompas } from '../store/slices/oompa-loompas/oompaLoompasSlice';
 import { getGenderLabel } from '../helpers/getGenderLabel';
-import { Labels } from '../config/labels'
+import { Labels } from '../config/labels';
 
 const DetailOompaLoompa = () => {
   const { id } = useParams();
@@ -38,7 +38,8 @@ const DetailOompaLoompa = () => {
               </div>
             </div>
           </div>
-        </div>)}
+        </div>
+      )}
       {isLoading && <p className="loader">{Labels.loading}</p>}
     </>
   );

@@ -17,7 +17,10 @@ export interface OompaLoompa {
   height: number;
 }
 
-export type FilteredOompaLoompa = Omit<OompaLoompa, 'favorite' | 'email' | 'age' | 'country' | 'height'>
+export type FilteredOompaLoompa = Omit<
+  OompaLoompa,
+  'favorite' | 'email' | 'age' | 'country' | 'height'
+>;
 
 export interface DetailedOompaLoompa extends FilteredOompaLoompa {
   description: string;

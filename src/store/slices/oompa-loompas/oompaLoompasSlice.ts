@@ -46,9 +46,8 @@ export const oompaLoompasSlice = createSlice({
     setDetailedOompaLoompas: (
       state,
       action: PayloadAction<{
-        detailedOompaLoompas: DetailedOompaLoompaWithoutId;
         oompaLoompaId: number;
-        activeDetailedOompaLoompa: DetailedOompaLoompaWithoutId;
+        detailedOompaLoompas: DetailedOompaLoompaWithoutId;
       }>,
     ) => {
       const incomingDetailedOompas = action.payload.detailedOompaLoompas;
@@ -63,7 +62,19 @@ export const oompaLoompasSlice = createSlice({
         ];
       }
       state.isLoading = false;
-      state.activeDetailedOompaLoompa = { id: action.payload.oompaLoompaId, ...action.payload.activeDetailedOompaLoompa };
+    },
+
+    setActiveDetailedOompaLoompa: (
+      state,
+      action: PayloadAction<{
+        oompaLoompaId: number;
+        activeDetailedOompaLoompa: DetailedOompaLoompaWithoutId;
+      }>,
+    ) => {
+      state.activeDetailedOompaLoompa = {
+        id: action.payload.oompaLoompaId,
+        ...action.payload.activeDetailedOompaLoompa,
+      };
     },
   },
 });
@@ -72,6 +83,7 @@ export const {
   startLoadingOompaLoompas,
   setOompaLoompas,
   setDetailedOompaLoompas,
+  setActiveDetailedOompaLoompa,
 } = oompaLoompasSlice.actions;
 
 export const selectOompaLoompas = (state: RootState): OompaLoompasState =>
